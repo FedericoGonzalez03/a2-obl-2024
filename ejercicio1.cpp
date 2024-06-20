@@ -19,7 +19,7 @@ class Pedido {
 
 
 int hashPiGravityProduct(int id) {
-    return id * 3.1416111806 * 9.813255456;
+    return id * 3.1408 * 9.8;
 }
 
 int main()
