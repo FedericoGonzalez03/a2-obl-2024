@@ -1,0 +1,22 @@
+{
+    "workbench.iconTheme": "material-icon-theme",
+    "files.autoSave": "afterDelay",
+    "editor.inlineSuggest.enabled": true,
+    "editor.guides.bracketPairs": true,
+    "terminal.integrated.defaultProfile.windows": "Git Bash",
+    "editor.minimap.enabled": false,
+    "editor.overviewRulerBorder": false,
+    "workbench.sideBar.location": "right",
+    "breadcrumbs.enabled": false,
+    "workbench.statusBar.visible": false,
+    "workbench.colorTheme": "Kamekazi Dark",
+    "editor.matchBrackets": "never",
+    "files.exclude": {
+        "**/*.class": true
+    },
+    "java.format.settings.url": ".vscode/java-formatter.xml",
+    "[java]": {
+        "editor.tabSize": 4,
+        "editor.detectIndentation": true
+    }
+}
