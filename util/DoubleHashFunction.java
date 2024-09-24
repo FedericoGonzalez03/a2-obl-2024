@@ -2,6 +2,6 @@ package util;
 
 public interface DoubleHashFunction<T> extends HashFunction<T> {
 	
-	Integer secondHash();
+	Integer secondHash(T element);
 
 }
