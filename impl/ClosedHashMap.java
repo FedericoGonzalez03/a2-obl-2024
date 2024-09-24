@@ -23,14 +23,14 @@ public class ClosedHashMap<K,V> implements Map<K,V> {
         }
     }
     
-    private KeyValue[] map;
+    private Object[] map;
     private int size = 0;
     private int capacity;
     private HashFunction<K> hash;
     private CollisionSolvingMethod csm;
 
     public ClosedHashMap(int capacity, HashFunction<K> hash, CollisionSolvingMethod collisionSolvingMethod) {
-        this.map = (KeyValue[]) new Object[capacity]; // https://stackoverflow.com/questions/2927391/whats-the-reason-i-cant-create-generic-array-types-in-java  ->  Answer by Peter Lawrey
+        this.map = new Object[capacity]; // https://stackoverflow.com/questions/2927391/whats-the-reason-i-cant-create-generic-array-types-in-java  ->  Answer by Peter Lawrey
         this.capacity = capacity;
         this.hash = hash;
         this.csm = collisionSolvingMethod;
@@ -43,14 +43,14 @@ public class ClosedHashMap<K,V> implements Map<K,V> {
         DoubleHashFunction<K> dh = (DoubleHashFunction<K>) this.hash;
         boolean setted = false;
         for (int i = 0; !setted; i++) {
-            int index = (dh.hash(key) + i * dh.secondHash(key)) % this.capacity;
+            int index = Math.abs((dh.hash(key) + i * dh.secondHash(key)) % this.capacity);
 
-            if (map[index] == null || map[index].wasDeleted) {
+            if (map[index] == null || ((KeyValue) map[index]).wasDeleted) {
                 map[index] = new KeyValue(key, value);
                 setted = true;
                 this.size++;                
-            } else if (map[index].key.equals(key)) {
-                map[index].value = value;
+            } else if (((KeyValue) map[index]).key.equals(key)) {
+                ((KeyValue) map[index]).value = value;
                 setted = true;
             }
         }
@@ -68,10 +68,10 @@ public class ClosedHashMap<K,V> implements Map<K,V> {
 
     private V dhGet(K key) {
         DoubleHashFunction<K> dh = (DoubleHashFunction<K>) this.hash;
-        int index = dh.hash(key) % this.capacity;
+        int index = Math.abs(dh.hash(key) % this.capacity);
         for (int i = 1; i < this.capacity && map[index] != null; i++) {
-            if (map[index].key.equals(key) && !map[index].wasDeleted) return map[index].value;
-            index = (dh.hash(key) + i * dh.secondHash(key)) % this.capacity;
+            if (((KeyValue) map[index]).key.equals(key) && !((KeyValue) map[index]).wasDeleted) return ((KeyValue) map[index]).value;
+            index = Math.abs((dh.hash(key) + i * dh.secondHash(key)) % this.capacity);
         }
         return null;
     }
@@ -87,13 +87,13 @@ public class ClosedHashMap<K,V> implements Map<K,V> {
 
     private void dhRemove(K key) {
         DoubleHashFunction<K> dh = (DoubleHashFunction<K>) this.hash;
-        int index = dh.hash(key) % this.capacity;
+        int index = Math.abs(dh.hash(key) % this.capacity);
         for (int i = 1; i < this.capacity && map[index] != null; i++) {
-            if (map[index].key.equals(key) && !map[index].wasDeleted) {
-                map[index].wasDeleted = true;
+            if (((KeyValue) map[index]).key.equals(key) && !((KeyValue) map[index]).wasDeleted) {
+                ((KeyValue) map[index]).wasDeleted = true;
                 this.size--;
             }
-            index = (dh.hash(key) + i * dh.secondHash(key)) % this.capacity;
+            index = Math.abs((dh.hash(key) + i * dh.secondHash(key)) % this.capacity);
         }
     }
 
@@ -110,10 +110,10 @@ public class ClosedHashMap<K,V> implements Map<K,V> {
 
     private boolean dhHas(K key) {
         DoubleHashFunction<K> dh = (DoubleHashFunction<K>) this.hash;
-        int index = dh.hash(key) % this.capacity;
+        int index = Math.abs(dh.hash(key) % this.capacity);
         for (int i = 1; i < this.capacity && map[index] != null; i++) {
-            if (map[index].key.equals(key) && !map[index].wasDeleted) return true;
-            index = (dh.hash(key) + i * dh.secondHash(key)) % this.capacity;
+            if (((KeyValue) map[index]).key.equals(key) && !((KeyValue) map[index]).wasDeleted) return true;
+            index = Math.abs((dh.hash(key) + i * dh.secondHash(key)) % this.capacity);
         }
         return false;
     }

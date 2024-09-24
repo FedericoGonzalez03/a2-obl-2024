@@ -6,6 +6,8 @@ import impl.ClosedHashMap.CollisionSolvingMethod;
 
 public class HMLibrary implements Library {
 
+    // posible función de hash: https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key
+
     private class Hash implements DoubleHashFunction<Integer> {
         public int hash(Integer i) {
             return i;

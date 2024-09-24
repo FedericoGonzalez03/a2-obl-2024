@@ -5,8 +5,8 @@ import util.Book;
 
 public class Ejercicio1 {
     public static void main(String[] args) {
-        AVLibrary library = new AVLibrary();
         try (Scanner sc = new Scanner(System.in)) {
+            AVLibrary library = new AVLibrary();
             int ops = sc.nextInt();
             sc.nextLine();
             for (int i = 0; i < ops; i++) {
@@ -19,18 +19,18 @@ public class Ejercicio1 {
                 case "FIND":
                     Book book = library.searchBook(Integer.parseInt(op[1]));
                     if (book == null)
-                        System.out.print("libro_no_encontrado\n");
+                        System.out.println("libro_no_encontrado");
                     else
-                        System.out.print(book.getTitle() + " " + (book.isAvailable() ? "H" : "D") + "\n");
+                        System.out.println(book.getTitle() + " " + (book.isAvailable() ? "H" : "D"));
                     break;
                 case "TOGGLE":
                     boolean found = library.toggleBookAvailability(Integer.parseInt(op[1]));
-                    if (!found) System.out.print("libro_no_encontrado\n");
+                    if (!found) System.out.println("libro_no_encontrado");
                     break;
 
                 case "COUNT":
                     Integer[] counts = library.countBooksByAvailability();
-                    System.out.print(counts[0] + counts[1] + " " + counts[0] + " " + counts[1] + "\n");
+                    System.out.println(counts[0] + counts[1] + " " + counts[0] + " " + counts[1]);
                     break;
                 case "PRINT":
                     library.print();

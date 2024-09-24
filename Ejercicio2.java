@@ -8,7 +8,7 @@ public class Ejercicio2 {
         try (Scanner sc = new Scanner(System.in)) {
             int ops = sc.nextInt();
             sc.nextLine();
-            HMLibrary library = new HMLibrary(ops);
+            HMLibrary library = new HMLibrary((int) ((ops / 70d) * 100));
             for (int i = 0; i < ops; i++) {
                 String op[] = sc.nextLine().split(" ");
                 String action = op[0];
@@ -19,18 +19,17 @@ public class Ejercicio2 {
                 case "FIND":
                     Book book = library.searchBook(Integer.parseInt(op[1]));
                     if (book == null)
-                        System.out.print("libro_no_encontrado\n");
+                        System.out.println("libro_no_encontrado");
                     else
-                        System.out.print(book.getTitle() + " " + (book.isAvailable() ? "H" : "D") + "\n");
+                        System.out.println(book.getTitle() + " " + (book.isAvailable() ? "H" : "D"));
                     break;
                 case "TOGGLE":
                     boolean found = library.toggleBookAvailability(Integer.parseInt(op[1]));
-                    if (!found) System.out.print("libro_no_encontrado\n");
+                    if (!found) System.out.println("libro_no_encontrado");
                     break;
-
                 case "COUNT":
                     Integer[] counts = library.countBooksByAvailability();
-                    System.out.print(counts[0] + counts[1] + " " + counts[0] + " " + counts[1] + "\n");
+                    System.out.println(counts[0] + counts[1] + " " + counts[0] + " " + counts[1]);
                     break;
                 case "PRINT":
                     library.print();

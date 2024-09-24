@@ -34,10 +34,10 @@ OperacionO
 La salida debe ser una lista de pedidos que faltan por entregar, ordenados de m√°s importante a menos importante.
 
 ```plaintext
-<id> <para-llevar> <items>
-<id> <para-llevar> <items>
+<id> <prioridad> <para-llevar> <items>
+<id> <prioridad> <para-llevar> <items>
 ...
-<id> <para-llevar> <items>
+<id> <prioridad> <para-llevar> <items>
 ```
 
 ## Restricciones
@@ -52,6 +52,7 @@ La salida debe ser una lista de pedidos que faltan por entregar, ordenados de m√
 
 ### Input
 
+```plaintext
 4
 7
 I 1 1 true BigORT
@@ -61,8 +62,11 @@ E 1
 C 2
 I 4 2 false BigORT
 E 3
+```
 
 ### Output
 
-2 true ORTastySignature_PapasChicas
-4 false BigORT
+```plaintext
+2 2 true ORTastySignature_PapasChicas
+4 2 false BigORT
+```
