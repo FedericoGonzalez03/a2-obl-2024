@@ -5,10 +5,10 @@ import adt.ABB;
 public class AVLImpl<T extends Comparable<T>> implements ABB<T> {
 
     private class Node {
-        T data;
-        Node left;
-        Node right;
-        int height;
+        public T data;
+        public Node left;
+        public Node right;
+        public int height;
 
         public Node(T data) {
             this.data = data;
