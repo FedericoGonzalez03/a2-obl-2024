@@ -1,7 +1,5 @@
 package impl;
 
-import java.util.Enumeration;
-
 import adt.Map;
 import util.DoubleHashFunction;
 import util.HashFunction;
@@ -39,19 +37,18 @@ public class ClosedHashMap<K,V> implements Map<K,V> {
     }
 
     private void dhSet(K key, V value) {
+
+        // implementar resize
+
         DoubleHashFunction<K> dh = (DoubleHashFunction<K>) this.hash;
         boolean setted = false;
         for (int i = 0; !setted; i++) {
             int index = (dh.hash(key) + i * dh.secondHash(key)) % this.capacity;
 
-            if (map[index] == null) {
+            if (map[index] == null || map[index].wasDeleted) {
                 map[index] = new KeyValue(key, value);
                 setted = true;
                 this.size++;                
-            } else if (map[index].wasDeleted) {
-                map[index] = new KeyValue(key, value);
-                setted = true;
-                this.size++;
             } else if (map[index].key.equals(key)) {
                 map[index].value = value;
                 setted = true;
@@ -67,6 +64,87 @@ public class ClosedHashMap<K,V> implements Map<K,V> {
                 dhSet(key, value);
             break;
         }
+    }
+
+    private V dhGet(K key) {
+        DoubleHashFunction<K> dh = (DoubleHashFunction<K>) this.hash;
+        int index = dh.hash(key) % this.capacity;
+        for (int i = 1; i < this.capacity && map[index] != null; i++) {
+            if (map[index].key.equals(key) && !map[index].wasDeleted) return map[index].value;
+            index = (dh.hash(key) + i * dh.secondHash(key)) % this.capacity;
+        }
+        return null;
+    }
+
+    @Override
+    public V get(K key) {
+        switch(this.csm){
+            default:
+            case DOUBLE_HASH:
+                return dhGet(key);
+        }
+    }
+
+    private void dhRemove(K key) {
+        DoubleHashFunction<K> dh = (DoubleHashFunction<K>) this.hash;
+        int index = dh.hash(key) % this.capacity;
+        for (int i = 1; i < this.capacity && map[index] != null; i++) {
+            if (map[index].key.equals(key) && !map[index].wasDeleted) {
+                map[index].wasDeleted = true;
+                this.size--;
+            }
+            index = (dh.hash(key) + i * dh.secondHash(key)) % this.capacity;
+        }
+    }
+
+    @Override
+    public void remove(K key) {
+        switch(this.csm){
+            default:
+            case DOUBLE_HASH:
+                dhRemove(key);
+            break;
+        }  
+
+    }
+
+    private boolean dhHas(K key) {
+        DoubleHashFunction<K> dh = (DoubleHashFunction<K>) this.hash;
+        int index = dh.hash(key) % this.capacity;
+        for (int i = 1; i < this.capacity && map[index] != null; i++) {
+            if (map[index].key.equals(key) && !map[index].wasDeleted) return true;
+            index = (dh.hash(key) + i * dh.secondHash(key)) % this.capacity;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean has(K key) {
+        switch(this.csm){
+            default:
+            case DOUBLE_HASH:
+                return dhHas(key);
+        }        
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return this.size == 0;
+    }
+
+    @Override
+    public int size() {
+        return this.size;
+    }
+
+    @Override
+    public Iterable<K> keys() {
+        throw new UnsupportedOperationException("Unimplemented method 'keys'");
+    }
+
+    @Override
+    public Iterable<V> values() {
+        throw new UnsupportedOperationException("Unimplemented method 'values'");
     }
 
 }

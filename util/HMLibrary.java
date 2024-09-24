@@ -1,28 +1,42 @@
 package util;
 
-import adt.ABB;
-import impl.AVLImpl;
+import adt.Map;
+import impl.ClosedHashMap;
+import impl.ClosedHashMap.CollisionSolvingMethod;
 
-public class AVLibrary implements Library{
+public class HMLibrary implements Library {
 
-    private ABB<Book> library = new AVLImpl<>();
+    private class Hash implements DoubleHashFunction<Integer> {
+        public int hash(Integer i) {
+            return i;
+        }
+        public int secondHash(Integer i) {
+            return i*i;
+        }
+    }
+
+
+    private Map<Integer, Book> library;
     private int availableCount = 0;
     private int notAvailableCount = 0;
+
+    public HMLibrary(int capacity) {
+        this.library = new ClosedHashMap<>(capacity, new Hash(), CollisionSolvingMethod.DOUBLE_HASH);
+    }
 
     @Override
     public void addBook(Integer id, String title) {
         Book newBook = new Book(id, title, true);
-        Book book = library.get(newBook);
+        Book book = library.get(id);
         if (book != null && book.isAvailable()) this.availableCount--;
         if (book != null && !book.isAvailable()) this.notAvailableCount--;
-        if (book != null) library.remove(book);
-        library.insert(newBook);
+        library.set(id, newBook);
         this.availableCount++;
     }
 
     @Override
     public Book searchBook(Integer id) {
-        return library.get(new Book(id, null, false));
+        return library.get(id);
     }
 
     @Override
@@ -37,8 +51,7 @@ public class AVLibrary implements Library{
             this.availableCount++;
         }
         book.toggleAvailability();
-        library.remove(book);
-        library.insert(book);
+        library.set(id, book);
         return true;
     }
 
@@ -48,7 +61,7 @@ public class AVLibrary implements Library{
     }
 
     public void print() {
-        ((AVLImpl<Book>) library).printGraph();
+        throw new UnsupportedOperationException("Unimplemented method 'print'");
     }
 
 }
