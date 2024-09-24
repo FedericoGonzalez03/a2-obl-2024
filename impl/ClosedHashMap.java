@@ -55,7 +55,6 @@ public class ClosedHashMap<K,V> implements Map<K,V> {
             } else if (map[index].key.equals(key)) {
                 map[index].value = value;
                 setted = true;
-                this.size++;
             }
         }
     }
