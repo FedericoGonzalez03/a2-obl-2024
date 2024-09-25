@@ -1,11 +1,11 @@
 package util;
 
 import adt.ABB;
-import impl.AVLImpl;
+import impl.AVL;
 
 public class AVLibrary implements Library{
 
-    private ABB<Book> library = new AVLImpl<>();
+    private ABB<Book> library = new AVL<>();
     private int availableCount = 0;
     private int notAvailableCount = 0;
 
@@ -48,7 +48,7 @@ public class AVLibrary implements Library{
     }
 
     public void print() {
-        ((AVLImpl<Book>) library).printGraph();
+        ((AVL<Book>) library).printGraph();
     }
 
 }

@@ -6,15 +6,12 @@ import impl.ClosedHashMap.CollisionSolvingMethod;
 
 public class HMLibrary implements Library {
 
-    // posible función de hash: https://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key
-
-    private class Hash implements DoubleHashFunction<Integer> {
+    private class IdHash implements DoubleHashFunction<Integer> {
         public int hash(Integer i) {
-            
-            return (i >>> 128) >>> 128;
+            return i;
         }
         public int secondHash(Integer i) {
-            return (i >>> 256);
+            return i * i;
         }
     }
 
@@ -24,7 +21,7 @@ public class HMLibrary implements Library {
     private int notAvailableCount = 0;
 
     public HMLibrary(int capacity) {
-        this.library = new ClosedHashMap<>(capacity, new Hash(), CollisionSolvingMethod.DOUBLE_HASH);
+        this.library = new ClosedHashMap<>(capacity, new IdHash(), CollisionSolvingMethod.DOUBLE_HASH);
     }
 
     @Override
