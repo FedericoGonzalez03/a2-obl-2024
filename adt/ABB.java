@@ -2,13 +2,13 @@ package adt;
 
 public interface ABB<T extends Comparable<T>> {
 
-    abstract void insert(T data);
+    abstract void insert(T element);
 
-    abstract void remove(T data);
+    abstract void remove(T element);
 
-    abstract boolean contains(T data);
+    abstract boolean contains(T element);
 
-    abstract T get(T data);
+    abstract T get(T element);
 
     abstract T max();
 

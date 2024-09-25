@@ -10,10 +10,11 @@ public class HMLibrary implements Library {
 
     private class Hash implements DoubleHashFunction<Integer> {
         public int hash(Integer i) {
-            return i;
+            
+            return (i >>> 128) >>> 128;
         }
         public int secondHash(Integer i) {
-            return i*i;
+            return (i >>> 256);
         }
     }
 

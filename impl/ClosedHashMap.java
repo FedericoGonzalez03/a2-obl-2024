@@ -30,7 +30,7 @@ public class ClosedHashMap<K,V> implements Map<K,V> {
     private CollisionSolvingMethod csm;
 
     public ClosedHashMap(int capacity, HashFunction<K> hash, CollisionSolvingMethod collisionSolvingMethod) {
-        this.map = new Object[capacity]; // https://stackoverflow.com/questions/2927391/whats-the-reason-i-cant-create-generic-array-types-in-java  ->  Answer by Peter Lawrey
+        this.map = new Object[capacity];
         this.capacity = capacity;
         this.hash = hash;
         this.csm = collisionSolvingMethod;
