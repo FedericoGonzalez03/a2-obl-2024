@@ -4,6 +4,7 @@ import util.HMLibrary;
 import util.Book;
 
 public class Ejercicio2 {
+    
     public static void main(String[] args) {
         try (Scanner sc = new Scanner(System.in)) {
             int ops = sc.nextInt();

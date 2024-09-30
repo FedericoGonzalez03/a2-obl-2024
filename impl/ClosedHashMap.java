@@ -3,6 +3,7 @@ package impl;
 import adt.Map;
 import util.DoubleHashFunction;
 import util.HashFunction;
+import adt.Iterable;
 
 @SuppressWarnings("unchecked")
 public class ClosedHashMap<K,V> implements Map<K,V> {

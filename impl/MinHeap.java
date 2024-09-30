@@ -38,8 +38,8 @@ public class MinHeap<T extends Comparable<T>> implements Heap<T> {
     private void goDown(int i) {
         Integer smallestIndex = null;
         T smallestValue = (T) this.heapTable[i];
-        T leftValue = (T) this.heapTable[left(i)];
-        T rightValue = (T) this.heapTable[right(i)];
+        T leftValue = left(i) > size ? null : (T) this.heapTable[left(i)];
+        T rightValue = right(i) > size ? null : (T) this.heapTable[right(i)];
         
         if (leftValue != null && leftValue.compareTo(smallestValue) < 0) {
             smallestIndex = left(i);
@@ -72,8 +72,7 @@ public class MinHeap<T extends Comparable<T>> implements Heap<T> {
     public T pop() {
         if (this.size == 0) return null; //TODO: Debería lanzar una exception, RuntimeException??
         T ret = (T) this.heapTable[1];
-        this.heapTable[1] = this.heapTable[this.size];
-        this.size--;
+        this.heapTable[1] = this.heapTable[this.size--];
         goDown(1);
         return ret;
     }
@@ -82,6 +81,16 @@ public class MinHeap<T extends Comparable<T>> implements Heap<T> {
     public T peek() {
         if (this.size == 0) return null; //TODO: Debería lanzar una exception, RuntimeException??
         return (T) this.heapTable[1];
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return this.size == 0;
+    }
+
+    @Override
+    public boolean isFull() {
+        return this.size == this.capacity;
     }
 
 }

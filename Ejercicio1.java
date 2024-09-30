@@ -4,6 +4,7 @@ import util.AVLibrary;
 import util.Book;
 
 public class Ejercicio1 {
+    
     public static void main(String[] args) {
         try (Scanner sc = new Scanner(System.in)) {
             AVLibrary library = new AVLibrary();

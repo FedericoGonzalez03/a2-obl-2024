@@ -13,7 +13,7 @@ public class Product implements Comparable<Product> {
     @Override
     public int compareTo(Product o) {
         if (this.price.equals(o.price)) {
-            return this.id.compareTo(o.id);
+            return o.id.compareTo(this.id);
         }
         return this.price.compareTo(o.price);
     }    

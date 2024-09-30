@@ -8,4 +8,8 @@ public interface Heap<T extends Comparable<T>> {
 
     public T peek();
 
+    public boolean isEmpty();
+
+    public boolean isFull();
+
 }
