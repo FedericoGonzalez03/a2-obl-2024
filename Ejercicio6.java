@@ -1,9 +1,7 @@
 import java.util.Scanner;
 
 import adt.Map;
-import adt.Graph;
 import impl.ClosedHashMap;
-import impl.MatrixGraph;
 import impl.ClosedHashMap.CollisionSolvingMethod;
 import util.HashFunction;
 import util.MissionCityMap;
