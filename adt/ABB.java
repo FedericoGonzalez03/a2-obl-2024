@@ -10,10 +10,6 @@ public interface ABB<T extends Comparable<T>> {
 
     public T get(T element);
 
-    public T max();
-
-    public T min();
-
     public int count();
 
     public void printInOrder();

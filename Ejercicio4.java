@@ -13,7 +13,7 @@ public class Ejercicio4 {
             sc.nextLine();
             OrdersQueue queue = new OrdersQueue(ordersCount);
             for (int i = 0; i < ops; i++) {
-                String op[] = sc.nextLine().split(" ");
+                String[] op = sc.nextLine().split(" ");
                 Integer id = Integer.parseInt(op[1]);
                 String action = op[0];
                 Order order = new Order(id);

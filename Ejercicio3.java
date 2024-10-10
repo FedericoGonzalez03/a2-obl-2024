@@ -13,7 +13,7 @@ public class Ejercicio3 {
             sc.nextLine();
             Integer[] prods = new Integer[prodsCount];
             for (int i = 0; i < prodsCount; i++) {
-                String prodProps[] = sc.nextLine().split(" ");
+                String[] prodProps = sc.nextLine().split(" ");
                 Integer id = Integer.parseInt(prodProps[0]);
                 Integer price = Integer.parseInt(prodProps[1]);
                 if (prods[id] == null) prods[id] = price;

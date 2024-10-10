@@ -94,7 +94,7 @@ public class ExtendedMinHeapPriorityQueue<T, P extends Comparable<P>> implements
 
     @Override
     public void insert(T element, P priority) {
-        if (this.isFull()) return; //TODO: Debería lanzar una exception, RuntimeException??
+        if (this.isFull()) throw new RuntimeException("PriorityQueue is full");
         this.heapTable[++this.size] = new Node(element, priority);
         this.positions.set(element, this.size);
         goUp(this.size);
@@ -103,7 +103,7 @@ public class ExtendedMinHeapPriorityQueue<T, P extends Comparable<P>> implements
     @Override
     public void remove(T element) {
         Integer index = this.positions.get(element);
-        if (index == null) return; //TODO: Debería lanzar una exception, RuntimeException??
+        if (index == null) throw new RuntimeException("Element not found in this PriorityQueue");
         this.positions.remove(element);
         if (index.equals(size)) {
             this.heapTable[index] = null;
@@ -119,14 +119,14 @@ public class ExtendedMinHeapPriorityQueue<T, P extends Comparable<P>> implements
     @Override
     public PriorityQueue.Node<T, P> get(T element) {
         Integer index = this.positions.get(element);
-        if (index == null) return null; //TODO: Debería lanzar una exception, RuntimeException??
+        if (index == null) throw new RuntimeException("Element not found in this PriorityQueue");
         return (PriorityQueue.Node<T, P>) this.heapTable[index];
     }
 
     @Override
     public void updatePriority(T oldElement, P newPriority) {
         Integer index = this.positions.get(oldElement);
-        if (index == null) return; //TODO: Debería lanzar una exception, RuntimeException??
+        if (index == null) throw new RuntimeException("Element not found in this PriorityQueue");
         this.heapTable[index] = new Node(oldElement, newPriority);
         this.positions.set(oldElement, index);
         goDown(index);
@@ -135,7 +135,7 @@ public class ExtendedMinHeapPriorityQueue<T, P extends Comparable<P>> implements
     
     @Override
     public T pop() {
-        if (this.isEmpty()) return null; //TODO: Debería lanzar una exception, RuntimeException??
+        if (this.isEmpty()) throw new RuntimeException("PriorityQueue is empty");
         T ret = ((PriorityQueue.Node<T, P>) this.heapTable[1]).getData();
         this.positions.remove(ret);
         this.heapTable[1] = this.heapTable[this.size--];
@@ -146,7 +146,7 @@ public class ExtendedMinHeapPriorityQueue<T, P extends Comparable<P>> implements
     
     @Override
     public T peek() {
-        if (this.isEmpty()) return null; //TODO: Debería lanzar una exception, RuntimeException??
+        if (this.isEmpty()) throw new RuntimeException("PriorityQueue is empty");
         return ((PriorityQueue.Node<T, P>) this.heapTable[1]).getData();
     }
 

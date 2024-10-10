@@ -151,18 +151,6 @@ public class AVL<T extends Comparable<T>> implements ABB<T> {
         return get(data, rootNode);
     }
 
-    @Override
-    public T max() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'max'");
-    }
-
-    @Override
-    public T min() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'min'");
-    }
-
     private int count(Node node) {
         if (node == null) return 0;
         return 1 + count(node.left) + count(node.right);

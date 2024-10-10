@@ -3,7 +3,7 @@ package impl;
 import adt.List;
 import adt.Iterator;
 
-public class LinkedList<T extends Comparable<T>> implements List<T> {
+public class LinkedList<T> implements List<T> {
 
     private class Node {
         public T data;
@@ -57,7 +57,14 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
         } else {
             boolean wasAdded = false;
             Node currNode = this.start;
-            int i = 0;
+            if (index == 0) {
+                Node tmp = this.start;
+                this.start = new Node();
+                this.start.data = element;
+                this.start.next = tmp;
+                wasAdded = true;
+            }
+            int i = 1;
             while (currNode != null && !wasAdded) {
                 if (i == index) {
                     Node tmp = currNode;
@@ -78,6 +85,26 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
             }
         }
         this.size++;
+    }
+
+    public void remove(int index) {
+        if (this.isEmpty()) throw new RuntimeException("Not reachable index");
+        if (index == 0) {
+            this.start = this.start.next;
+        } else {
+            boolean wasRemoved = false;
+            Node currNode = this.start;
+            int i = 1;
+            while (currNode.next != null && !wasRemoved) {
+                if (i == index) {
+                    currNode.next = currNode.next.next;
+                    wasRemoved = true;
+                }
+                currNode = currNode.next;
+                i++;
+            }
+        }
+        this.size--;
     }
 
     public T get(int index) {

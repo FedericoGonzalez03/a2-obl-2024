@@ -63,14 +63,14 @@ public class MinHeap<T extends Comparable<T>> implements Heap<T> {
 
     @Override
     public void insert(T element) {
-        if (this.size == this.capacity) return; //TODO: Debería lanzar una exception, RuntimeException??
+        if (this.size == this.capacity) throw new RuntimeException("Heap is full");
         this.heapTable[++this.size] = element;
         goUp(this.size);
     }
     
     @Override
     public T pop() {
-        if (this.size == 0) return null; //TODO: Debería lanzar una exception, RuntimeException??
+        if (this.size == 0) throw new RuntimeException("Heap is empty");
         T ret = (T) this.heapTable[1];
         this.heapTable[1] = this.heapTable[this.size--];
         goDown(1);
@@ -79,7 +79,7 @@ public class MinHeap<T extends Comparable<T>> implements Heap<T> {
     
     @Override
     public T peek() {
-        if (this.size == 0) return null; //TODO: Debería lanzar una exception, RuntimeException??
+        if (this.size == 0) throw new RuntimeException("Heap is empty");
         return (T) this.heapTable[1];
     }
 

@@ -11,7 +11,7 @@ public class Ejercicio2 {
             sc.nextLine();
             HMLibrary library = new HMLibrary((int) ((ops / 70d) * 100));
             for (int i = 0; i < ops; i++) {
-                String op[] = sc.nextLine().split(" ");
+                String[] op = sc.nextLine().split(" ");
                 String action = op[0];
                 switch (action) {
                 case "ADD":

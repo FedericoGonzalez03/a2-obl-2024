@@ -9,3 +9,7 @@
 /OrdersQueue$OrderHash.class
 /OrdersQueue.class
 /Product.class
+/Mission.class
+/OrderPriority.class
+/MissionCityMap$Travel.class
+/MissionCityMap.class

@@ -8,3 +8,10 @@
 /MinHeap.class
 /MinHeapPriorityQueue$Node.class
 /MinHeapPriorityQueue.class
+/LinkedList$Node.class
+/LinkedList$NodeIterator.class
+/LinkedList.class
+/ListQueue.class
+/ListStack.class
+/MatrixGraph$Edge.class
+/MatrixGraph.class

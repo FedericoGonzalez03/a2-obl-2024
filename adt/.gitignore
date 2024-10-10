@@ -4,3 +4,10 @@
 /Heap.class
 /PriorityQueue$Node.class
 /PriorityQueue.class
+/Graph$Edge.class
+/Graph.class
+/Iterable.class
+/Iterator.class
+/List.class
+/Queue.class
+/Stack.class
