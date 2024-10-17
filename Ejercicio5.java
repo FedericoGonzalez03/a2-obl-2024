@@ -61,8 +61,8 @@ public class Ejercicio5 {
             }
             
             visitedInDfs = new boolean[missionCount + 1];
-            for (Mission m : missions) {
-                if (m != null) dfs(missionDeps, m.missionId);
+            for (Mission m : missions) { // M * (A + V)
+                if (m != null) dfs(missionDeps, m.missionId); // A + V
             }
 
             int[] missionOrder = new int[missionCount];
